@@ -11,6 +11,8 @@
 #include "TPaveStats.h"
 #include "TString.h"
 
+#include "TFile.h"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -126,4 +128,20 @@ int main(int argc, char* argv[]) {
   Stime->Draw("Hist"); c->SaveAs(filename+"_Stime.png");
   tCtime->Draw("Hist"); c->SaveAs(filename+"_TotalCtime.png");
   tStime->Draw("Hist"); c->SaveAs(filename+"_TotalStime.png");
+
+	TFile *outfile = new TFile(filename+"_out.root","recreate");
+	tEdep->Write();
+	tCtime->Write();
+	tStime->Write();
+	tChit->Write();
+	tShit->Write();
+
+	Edep->Write();
+	Ctime->Write();
+	Stime->Write();
+	Chit->Write();
+	Shit->Write();
+	outfile->Close();
+
+
 }
